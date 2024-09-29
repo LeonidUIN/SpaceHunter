@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космический Охотник</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <button id="pauseButton">⏸️</button>
+    <div id="mainMenu" class="menu">
+        <h1>Космический Охотник</h1>
+        <button id="startButton">Начать игру</button>
+        <button id="settingsButton">Настройки</button>
+        <button id="controlsButton">Управление</button>
+        <button id="exitButton">Выйти</button>
+    </div>
+    <div id="pauseMenu" class="menu" style="display:none;">
+        <h2>Пауза</h2>
+        <button id="resumeButton">Продолжить</button>
+        <button id="mainMenuButton">Главное меню</button>
+        <button id="pauseSettingsButton">Настройки</button>
+        <button id="quitButton">Выйти из игры</button>
+    </div>
+    <div id="settingsMenu" class="menu" style="display:none;">
+        <h2>Настройки звука</h2>
+        <label>Громкость музыки: <span id="musicVolumeValue">50</span></label>
+        <input type="range" id="musicVolume" min="0" max="100" value="50">
+        <label>Громкость эффектов: <span id="sfxVolumeValue">50</span></label>
+        <input type="range" id="sfxVolume" min="0" max="100" value="50">
+        <button id="saveSettingsButton">Сохранить</button>
+    </div>
+    <div id="controlsMenu" class="menu" style="display:none;">
+        <h2>Управление</h2>
+        <p>Стрелки: движение</p>
+        <p>Пробел: стрельба</p>
+        <p>Esc: пауза</p>
+        <button id="backToMainMenuButton">Назад</button>
+    </div>
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>
