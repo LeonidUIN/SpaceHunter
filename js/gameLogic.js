@@ -26,13 +26,16 @@ function updateEnemies(enemies, canvasWidth, canvasHeight) {
 }
 
 function spawnEnemies(enemies, canvasWidth, level) {
-    if (Math.random() < CONFIG.ENEMY.SPAWN_RATE * level) {
+    if (Math.random() < CONFIG.ENEMIES.SPAWN_RATE * level) { // Изменено с CONFIG.ENEMY на CONFIG.ENEMIES
+        const enemyType = CONFIG.ENEMIES.TYPES[Math.floor(Math.random() * CONFIG.ENEMIES.TYPES.length)];
         enemies.push({
-            x: Math.random() * (canvasWidth - CONFIG.ENEMY.SIZE),
-            y: -CONFIG.ENEMY.SIZE,
-            size: CONFIG.ENEMY.SIZE,
-            speed: CONFIG.ENEMY.SPEED,
-            hp: CONFIG.ENEMY.HP
+            x: Math.random() * (canvasWidth - enemyType.size),
+            y: -enemyType.size,
+            size: enemyType.size,
+            speed: enemyType.speed,
+            hp: enemyType.hp,
+            damage: enemyType.damage,
+            points: enemyType.points,
         });
     }
 }
@@ -45,8 +48,8 @@ function checkCollisions(ship, bullets, enemies, boss, score) {
                 enemies[j].hp -= bullets[i].damage;
                 bullets.splice(i, 1);
                 if (enemies[j].hp <= 0) {
+                    score += enemies[j].points; // Изменено на использование points конкретного врага
                     enemies.splice(j, 1);
-                    score += CONFIG.ENEMY.SCORE;
                 }
                 break;
             }
@@ -56,7 +59,7 @@ function checkCollisions(ship, bullets, enemies, boss, score) {
     // Проверка столкновений корабля с врагами
     for (let i = enemies.length - 1; i >= 0; i--) {
         if (isColliding(ship, enemies[i])) {
-            ship.hp -= CONFIG.ENEMY.DAMAGE;
+            ship.hp -= enemies[i].damage;
             enemies.splice(i, 1);
         }
     }
